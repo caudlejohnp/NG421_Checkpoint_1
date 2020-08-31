@@ -1,4 +1,7 @@
 export interface ITodo {
     id?: number;
-    title: string;
+  title: string;
+  status: string;
+  description?: string;
+  createdAt: Date;
   }

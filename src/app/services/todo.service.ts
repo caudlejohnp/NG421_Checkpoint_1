@@ -1,25 +1,36 @@
-import { Injectable } from '@angular/core';
-import {ITodo} from '../interfaces/itodo';
+import { Injectable } from "@angular/core";
+import { ITodo } from "../interfaces/itodo";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TodoService {
   todoId: number = 0;
-  todoList: ITodo [] = [
+  statuses: string[] = ["Todo", "Doing", "Done"];
+  todoList: ITodo[] = [
     // example of how to make an item in todo list
-    { title: 'Install Angular CLI', id: this.todoId },
-  
-  ]
-  constructor() { }
-  getTodos(){
-    return this.todoList;
+    {
+      title: "Install Angular CLI",
+      id: this.todoId,
+      status: "Todo",
+      createdAt: new Date(),
+    },
+  ];
+  constructor() {}
+  getTodos(status?: string) {
+    if (!status) {
+      return this.todoList;
+    }
+    return this.todoList.filter(s => s.status === status);
   }
   deleteTodo(todo: ITodo) {
-    const index = this.todoList.findIndex(todoItem => todoItem === todo);
+    const index = this.todoList.findIndex((todoItem) => todoItem === todo);
     this.todoList.splice(index, 1);
   }
-  addTodo(todo: ITodo):void {
-    todo.id = this.todoId ++;
-    todoList.push(todo);
+  addTodo(todo: ITodo): void {
+    todo.id = this.todoId++;
+    this.todoList.push(todo);
+  }
+  getStatuses(todo: ITodo) {
+    return this.statuses;
   }
 }
