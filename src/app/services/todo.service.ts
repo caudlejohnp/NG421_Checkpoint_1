@@ -30,7 +30,7 @@ export class TodoService {
     todo.id = this.todoId++;
     this.todoList.push(todo);
   }
-  getStatuses(todo: ITodo) {
+  getStatuses() {
     return this.statuses;
   }
 }
